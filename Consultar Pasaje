@@ -1,0 +1,187 @@
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class ConsultarPasaje extends JDialog implements ItemListener, ActionListener {
+
+	private final JPanel contentPanel = new JPanel();
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+	private JLabel lblPrecio;
+	private JLabel lblNewLabel_3;
+	private JTextField txtPasajeros;
+	private JTextField txtPrecio;
+	private JTextField txtPuntos;
+	private JButton btnCerrar;
+	private JComboBox cboDestino;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			ConsultarPasaje dialog = new ConsultarPasaje();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public ConsultarPasaje() {
+		setBounds(100, 100, 429, 175);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		
+		lblNewLabel_1 = new JLabel("Destino:");
+		lblNewLabel_1.setBounds(22, 11, 46, 14);
+		contentPanel.add(lblNewLabel_1);
+		
+		lblNewLabel_2 = new JLabel("N\u00B0 Pasajeros:");
+		lblNewLabel_2.setBounds(22, 36, 74, 14);
+		contentPanel.add(lblNewLabel_2);
+		
+		lblPrecio = new JLabel("Precio:");
+		lblPrecio.setBounds(22, 61, 46, 14);
+		contentPanel.add(lblPrecio);
+		
+		lblNewLabel_3 = new JLabel("Puntos:\r\n");
+		lblNewLabel_3.setBounds(22, 86, 46, 14);
+		contentPanel.add(lblNewLabel_3);
+		
+		txtPasajeros = new JTextField();
+		txtPasajeros.setEditable(false);
+		txtPasajeros.setBounds(123, 33, 141, 20);
+		contentPanel.add(txtPasajeros);
+		txtPasajeros.setColumns(10);
+		
+		txtPrecio = new JTextField();
+		txtPrecio.setEditable(false);
+		txtPrecio.setBounds(123, 58, 141, 20);
+		contentPanel.add(txtPrecio);
+		txtPrecio.setColumns(10);
+		
+		txtPuntos = new JTextField();
+		txtPuntos.setEditable(false);
+		txtPuntos.setBounds(123, 83, 141, 20);
+		contentPanel.add(txtPuntos);
+		txtPuntos.setColumns(10);
+		
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(this);
+		btnCerrar.setBounds(314, 7, 89, 23);
+		contentPanel.add(btnCerrar);
+		
+		cboDestino = new JComboBox();
+		cboDestino.addItemListener(this);
+		cboDestino.setModel(new DefaultComboBoxModel(new String[] {"Brazil", "Estados Unidos", "Mexico", "Puerto Rico", "Republica Dominicana"}));
+		cboDestino.setBounds(123, 8, 141, 20);
+		contentPanel.add(cboDestino);
+		
+		cboDestino.setToolTipText(""+VentaPrincipal.destinobra0);
+		txtPasajeros.setText(""+VentaPrincipal.numpasaj0);
+		txtPrecio.setText(""+VentaPrincipal.preciobra);
+		txtPuntos.setText(""+VentaPrincipal.puntosbra);
+		
+		
+	}
+
+	
+	
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == cboDestino) {
+			itemStateChangedCboDestino(e);
+		}
+	}
+	protected void itemStateChangedCboDestino(ItemEvent e) {
+		int destino,puntos,pasajeros;
+		double prec;
+		
+		destino = determinarDestino();
+	    pasajeros = determinarPasajeros(destino);
+	    prec = determinarPrecio(destino);
+	    puntos = determinarPuntos(destino);
+	    mostrarResultados(pasajeros,prec,puntos);
+	}
+	int determinarDestino(){
+		return cboDestino.getSelectedIndex();
+		
+	}
+	int determinarPasajeros(int destino){
+      switch (destino){
+      case 0:
+    	  return VentaPrincipal.numpasaj0;
+      case 1:
+    	  return VentaPrincipal.numpasaj0;
+      case 2:
+    	  return VentaPrincipal.numpasaj0;
+      case 3:
+    	  return VentaPrincipal.numpasaj0;
+      default:
+    	  return VentaPrincipal.numpasaj0;    	  
+		}
+	}
+	double determinarPrecio(int destino){
+		switch (destino){
+		case 0: 
+			return VentaPrincipal.preciobra;
+		case 1:
+			return VentaPrincipal.precioeeuu;
+		case 2:
+			return VentaPrincipal.preciomx;
+		case 3:
+			return VentaPrincipal.precioprico;
+		default:
+			return VentaPrincipal.preciorepdom;
+			
+		}
+	}
+	int determinarPuntos(int destino){
+		switch (destino){
+		case 0:
+			return VentaPrincipal.puntosbra;
+		case 1:
+			return VentaPrincipal.puntoseeuu;
+		case 2:
+			return VentaPrincipal.puntosmx;
+		case 3:
+			return VentaPrincipal.puntosprico;
+		default:
+			return VentaPrincipal.puntosrepdomi;
+			
+		}
+	}
+	void mostrarResultados( int pasajeros, double prec,int puntos){
+		txtPasajeros.setText(pasajeros	+	"\n\n");
+		txtPrecio.setText(prec	+	"\n\n");
+		txtPuntos.setText(puntos	+	"\n\n");
+		
+	}
+	
+	
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnCerrar) {
+			actionPerformedBtnCerrar(arg0);
+		}
+	}
+	protected void actionPerformedBtnCerrar(ActionEvent arg0) {
+		dispose();
+	}
+}
