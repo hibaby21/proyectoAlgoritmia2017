@@ -1,0 +1,144 @@
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
+
+public class ListarPasaje extends JDialog implements ActionListener {
+
+	private final JPanel contentPanel = new JPanel();
+	private JScrollPane scrollPane;
+	private JButton btnCerrar;
+	private JButton btnListar;
+	
+	int pasajeros,puntos1,puntos2,puntos3,puntos4,puntos5;
+	double precio1,precio2,precio3,precio4,precio5;
+	String destino,destino1,destino2,destino3,destino4,destino5;
+	private JTextArea txtS;
+	
+
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			ListarPasaje dialog = new ListarPasaje();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public ListarPasaje() {
+		setBounds(100, 100, 453, 336);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBounds(10, 11, 414, 239);
+		contentPanel.add(scrollPane);
+		
+		txtS = new JTextArea();
+		scrollPane.setViewportView(txtS);
+		
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(this);
+		btnCerrar.setBounds(120, 261, 89, 23);
+		contentPanel.add(btnCerrar);
+		
+		btnListar = new JButton("Listar");
+		btnListar.addActionListener(this);
+		btnListar.setBounds(219, 261, 89, 23);
+		contentPanel.add(btnListar);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCerrar) {
+			actionPerformedBtnCerrar(e);
+		}
+		if (e.getSource() == btnListar) {
+			actionPerformedBtnListar(e);
+		}
+	}
+	protected void actionPerformedBtnListar(ActionEvent e) {
+		mostrarDestino();
+		mostrarPasajero();
+		mostrarPrecio();
+		mostrarPuntos();
+		motrarResultados();
+		
+	}
+	void mostrarDestino(){
+		destino1 = VentaPrincipal.destinobra0;
+		destino2 = VentaPrincipal.destinoeeuu0;
+		destino3 = VentaPrincipal.destinomx0;
+		destino4 = VentaPrincipal.destinoprico0;
+		destino5 = VentaPrincipal.destinorepdom0;
+		
+	}
+	void mostrarPasajero(){
+		pasajeros = VentaPrincipal.numpasaj0;
+		
+	}
+	void mostrarPrecio(){
+		precio1 = VentaPrincipal.preciobra;
+		precio2 = VentaPrincipal.precioeeuu;
+		precio3 = VentaPrincipal.preciomx;
+		precio4 = VentaPrincipal.precioprico;
+		precio5 = VentaPrincipal.preciorepdom;
+		
+	}
+	void mostrarPuntos(){
+		puntos1 = VentaPrincipal.puntosbra;
+		puntos2 = VentaPrincipal.puntoseeuu;
+		puntos3 = VentaPrincipal.puntosmx;
+		puntos4 = VentaPrincipal.puntosprico;
+		puntos5 = VentaPrincipal.puntosrepdomi;
+		
+	}
+	void motrarResultados(){
+		txtS.setText("Listado de Pasajes:	"+	"\n\n");
+		txtS.append("Destino:		"+destino1+	"\n");
+		txtS.append("Numero de Pasajeros:	"+ pasajeros +	"\n");
+		txtS.append("Precio:		"+precio1+ "\n");
+		txtS.append("Puntos Obtenidos:	"+ puntos1 +"\n\n\n");
+		txtS.append("Destino:		"+ destino2 +	"\n");
+		txtS.append("Numero de Pasajeros:	"+ pasajeros +	"\n");
+		txtS.append("Precio:		"+ precio2 +"\n");
+		txtS.append("Puntos Obtenidos:	"+ puntos2 +	"\n\n\n");
+		txtS.append("Destino:		"+ destino3 +	"\n");
+		txtS.append("Numero de Pasajeros:	"+ pasajeros +	"\n");
+		txtS.append("Precio:		"+ precio3 +"\n");
+		txtS.append("Puntos Obtenidos:	"+ puntos3 +	"\n\n\n");
+		txtS.append("Destino:		"+ destino4 +	"\n");
+		txtS.append("Numero de Pasajeros:	"+ pasajeros +	"\n");
+		txtS.append("Precio:		"+ precio4 +"\n");
+		txtS.append("Puntos Obtenidos:	"+ puntos4 +	"\n\n\n");
+		txtS.append("Destino:		"+ destino5 +	"\n");
+		txtS.append("Numero de Pasajeros:	"+ pasajeros +	"\n");
+		txtS.append("Precio:		"+ precio5 +"\n");
+		txtS.append("Puntos Obtenidos:	"+ puntos5 +	"\n\n\n");
+	
+		
+	}
+				
+	protected void actionPerformedBtnCerrar(ActionEvent e) {
+		dispose();
+	}
+}
