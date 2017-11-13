@@ -1,0 +1,164 @@
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class ModificarPasaje extends JDialog implements ActionListener {
+	private JTextField txtBrazil;
+	private JTextField txtEstadosUnidos;
+	private JTextField txtMexico;
+	private JTextField txtPuertoRico;
+	private JTextField txtRepublicaDominicana;
+	private JButton btnGrabar;
+	private JButton btnCerrar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			ModificarPasaje dialog = new ModificarPasaje();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public ModificarPasaje() {
+		setBounds(100, 100, 450, 197);
+		getContentPane().setLayout(null);
+		{
+			JLabel lblBrzil = new JLabel("Brazil:                                  ");
+			lblBrzil.setBounds(10, 11, 238, 14);
+			getContentPane().add(lblBrzil);
+		}
+		{
+			JLabel lblEstadosUnidos = new JLabel("Estados Unidos:                      ");
+			lblEstadosUnidos.setBounds(10, 36, 238, 14);
+			getContentPane().add(lblEstadosUnidos);
+		}
+		{
+			JLabel lblMexico = new JLabel("Mexico:                                  ");
+			lblMexico.setBounds(10, 61, 255, 14);
+			getContentPane().add(lblMexico);
+		}
+		{
+			JLabel lblPuertoRico = new JLabel("Puerto Rico:                            ");
+			lblPuertoRico.setBounds(10, 86, 238, 14);
+			getContentPane().add(lblPuertoRico);
+		}
+		{
+			JLabel lblRepublicaDominicana = new JLabel("Republica Dominicana:           ");
+			lblRepublicaDominicana.setBounds(10, 111, 238, 14);
+			getContentPane().add(lblRepublicaDominicana);
+		}
+		{
+			txtBrazil = new JTextField();
+			txtBrazil.setText("480.0");
+			txtBrazil.setBounds(168, 8, 123, 20);
+			getContentPane().add(txtBrazil);
+			txtBrazil.setColumns(10);
+		}
+		{
+			txtEstadosUnidos = new JTextField();
+			txtEstadosUnidos.setBounds(168, 33, 123, 20);
+			getContentPane().add(txtEstadosUnidos);
+			txtEstadosUnidos.setColumns(10);
+		}
+		{
+			txtMexico = new JTextField();
+			txtMexico.setBounds(168, 58, 123, 20);
+			getContentPane().add(txtMexico);
+			txtMexico.setColumns(10);
+		}
+		{
+			txtPuertoRico = new JTextField();
+			txtPuertoRico.setBounds(168, 83, 123, 20);
+			getContentPane().add(txtPuertoRico);
+			txtPuertoRico.setColumns(10);
+		}
+		{
+			txtRepublicaDominicana = new JTextField();
+			txtRepublicaDominicana.setBounds(168, 108, 123, 20);
+			getContentPane().add(txtRepublicaDominicana);
+			txtRepublicaDominicana.setColumns(10);
+		}
+		{
+			btnCerrar = new JButton("Cerrar");
+			btnCerrar.addActionListener(this);
+			btnCerrar.setBounds(340, 7, 89, 23);
+			getContentPane().add(btnCerrar);
+		}
+		{
+			btnGrabar = new JButton("Grabar");
+			btnGrabar.addActionListener(this);
+			btnGrabar.setBounds(340, 32, 89, 23);
+			getContentPane().add(btnGrabar);
+			
+		}
+		{
+			txtMexico.setText(""+VentaPrincipal.preciobra);
+			txtEstadosUnidos.setText(""+VentaPrincipal.precioeeuu);
+			txtMexico.setText(""+VentaPrincipal.preciomx);
+			txtPuertoRico.setText(""+VentaPrincipal.precioprico);
+			txtRepublicaDominicana.setText(""+VentaPrincipal.preciorepdom);
+			
+		}
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCerrar) {
+			actionPerformedBtnCerrar(e);
+		}
+		if (e.getSource() == btnGrabar) {
+			actionPerformedBtnGrabar(e);
+		}
+	}
+	protected void actionPerformedBtnGrabar(ActionEvent e) {
+		precioDestino1();
+		precioDestino2();
+		precioDestino3();
+		precioDestino4();
+		precioDestino5();
+		mostrarResultados();
+		
+	}
+	void precioDestino1(){
+		VentaPrincipal.preciobra = Double.parseDouble(txtBrazil.getText());
+	 }
+	void precioDestino2(){
+		VentaPrincipal.precioeeuu = Double.parseDouble(txtEstadosUnidos.getText());
+	 }
+	void precioDestino3(){
+		VentaPrincipal.preciomx = Double.parseDouble(txtMexico.getText());
+	 }
+	void precioDestino4(){
+		VentaPrincipal.precioprico = Double.parseDouble(txtPuertoRico.getText());
+	 }
+	void precioDestino5(){
+		VentaPrincipal.preciorepdom = Double.parseDouble(txtRepublicaDominicana.getText());		
+	  }
+	void mostrarResultados(){
+		txtBrazil.setText(VentaPrincipal.preciobra	+	"\n\n");
+		txtEstadosUnidos.setText(VentaPrincipal.precioeeuu	+	"\n\n");
+		txtMexico.setText(VentaPrincipal.preciomx	+	"\n");
+		txtPuertoRico.setText(VentaPrincipal.precioprico	+	"\n\n");
+		txtRepublicaDominicana.setText(VentaPrincipal.preciorepdom	+	"\n\n");
+		
+		
+	}
+	protected void actionPerformedBtnCerrar(ActionEvent e) {
+		dispose();
+	}
+}
